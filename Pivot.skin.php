@@ -6,13 +6,10 @@
  * @file
  * @ingroup Skins
  */
- 
-
-class SkinPivot extends SkinTemplate {
-	public $skinname = 'pivot', $stylename = 'pivot', $template = 'pivotTemplate', $useHeadElement = true;
-	
-	public function getDefaultModules() {
+class PivotTemplate extends BaseTemplate {
+	public function execute() {
 		global $wgPivotFeatures;
+		$user = $this->getSkin()->getUser();
 		$wgPivotFeaturesDefaults = array(
 			'showActionsForAnon' => true,
 			'fixedNavBar' => false,
@@ -37,29 +34,7 @@ class SkinPivot extends SkinTemplate {
 		if ( $wgPivotFeatures['preloadFontAwesome'] ) {
 			$this->getOutput()->addHeadItem('font', '<link rel="preload" href="'.$wgLocalStylePath.'/pivot/assets/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin="anonymous" />');
 		}
-		
-		$this->getOutput()->addModuleStyles('skins.pivot.styles');
-    	return parent::getDefaultModules();
-	}
-	
-	public function initPage(OutputPage $out) {
-		global $wgLocalStylePath;
-		parent::initPage($out);
 
-		$viewport_meta = 'width=device-width, user-scalable=yes, initial-scale=1.0';
-		$out->addMeta('viewport', $viewport_meta);
-		$out->addModules('skins.pivot.js');
-	}
-
-}
-
-
-class pivotTemplate extends BaseTemplate {
-	public function execute() {
-		global $wgUser;
-		global $wgPivotFeatures;
-		Wikimedia\suppressWarnings();
-		$this->html('headelement');
 		switch ($wgPivotFeatures['usePivotTabs']) {
 			case true:
 			    ob_start();
@@ -106,7 +81,7 @@ class pivotTemplate extends BaseTemplate {
 					</section>
 					
 					<section id="right-nav-aside" class="right-small">
-					<a href="#" class="right-off-canvas-toggle"><span id="menu-user"><i class="fa <?php if ($wgUser->isRegistered()): ?>fa-user<?php else: ?>fa-navicon<?php endif; ?> fa-lg"></i></span></a>
+					<a href="#" class="right-off-canvas-toggle"><span id="menu-user"><i class="fa <?php if ($user->isRegistered()): ?>fa-user<?php else: ?>fa-navicon<?php endif; ?> fa-lg"></i></span></a>
 					</section>
 				</nav>
 				<?php if ($wgPivotFeatures['fixedNavBar'] != false) echo "</div>"; ?>
@@ -129,7 +104,7 @@ class pivotTemplate extends BaseTemplate {
 					
 					<aside class="right-off-canvas-menu">
 					  <ul class="off-canvas-list">
-					<?php if ($wgUser->isRegistered()): ?>
+					<?php if ($user->isRegistered()): ?>
 						<li id="personal-tools"><label><?php echo wfMessage( 'pivot-personal-tools' )->text() ?></label></li>
 						<?php foreach ($this->getPersonalTools() as $key => $item) { echo $this->makeListItem($key, $item); } ?>
 							<?php else: ?>
@@ -173,7 +148,7 @@ class pivotTemplate extends BaseTemplate {
 												<!-- Output page indicators -->
 												<?php echo $this->getIndicators(); ?>
 												<!-- If user is logged in output echo location -->
-												<?php if ($wgUser->isRegistered()): ?>
+												<?php if ($user->isRegistered()): ?>
 												<div id="echo-notifications">
 												<div id="echo-notifications-alerts"></div>
 												<div id="echo-notifications-messages"></div>
@@ -189,7 +164,7 @@ class pivotTemplate extends BaseTemplate {
 										</div>
 									</div>
 								
-									<?php if ($wgUser->isRegistered() || $wgPivotFeatures['showActionsForAnon']): ?>
+									<?php if ($user->isRegistered() || $wgPivotFeatures['showActionsForAnon']): ?>
 										<a href="#" data-options="align:left" data-dropdown="drop1" class="button secondary small radius pull-right hide-for-print" id="drop"><i class="fa fa-navicon fa-lg"><span id="page-actions" class="show-for-medium-up">&nbsp;<?php echo wfMessage( 'actions' )->text() ?></span></i></a>
 										<ul id="drop1" class="tiny content f-dropdown" data-dropdown-content>
 											<?php foreach($this->data['content_actions'] as $key => $tab) { echo preg_replace(array('/\sprimary="1"/', '/\scontext="[a-z]+"/', '/\srel="archives"/'),'',$this->makeListItem($key, $tab)); } ?>
@@ -277,18 +252,12 @@ class pivotTemplate extends BaseTemplate {
 		<div>
 			<a class="exit-off-canvas"></a>	
 		</div>
-		
-		
-		<?php $this->printTrail(); ?>
 
 			<?php if ($this->data['isarticle'] && $wgPivotFeatures['addThisPUBID'] !== '') { ?>
 				<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<?php echo $wgPivotFeatures['addThisPUBID']; ?>" async="async"></script>
 			<?php } ?>	
-		</body>
-		</html>
 
 <?php
-		Wikimedia\restoreWarnings();
 		
 	}
 	
