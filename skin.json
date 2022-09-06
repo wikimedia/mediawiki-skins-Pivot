@@ -41,7 +41,10 @@
 	},
 	"ResourceModules": {
 		"skins.pivot.styles": {
-			"position": "top",
+			"class": "ResourceLoaderSkinModule",
+			"features": {
+				"toc": true
+			},
 			"styles": [
 				"assets/stylesheets/normalize.css",
 				"assets/stylesheets/font-awesome.css",
