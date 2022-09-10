@@ -1,3 +1,6 @@
+For MediaWiki (MW) 1.38 and later no dedicated tags will be created, i.e. for 1.38.x use branch
+`REL1_38`. For MW 1.39.x use `REL1_39`, etc.
+
 # Version 2.3.0
 * [compatibility, CSS] Load MW core CSS that was dropped in MW 1.35
 * [code] Drop Travis-CI and move to CircleCI
