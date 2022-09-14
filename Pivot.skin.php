@@ -20,7 +20,7 @@ class PivotTemplate extends BaseTemplate {
 			'wikiNameDesktop' => &$GLOBALS['wgSitename'],
 			'navbarIcon' => false,
 			'preloadFontAwesome' => false,
-			'showFooterIcons' => false,
+			'showFooterIcons' => true,
 			'addThisPUBID' => '',
 			'useAddThisShare' => '',
 			'useAddThisFollow' => ''
@@ -230,7 +230,8 @@ class PivotTemplate extends BaseTemplate {
 														</div>
 													<?php } ?>
 												</li>
-												<?php foreach ($this->getFooterIcons($poweredbyType) as $blockName => $footerIcons) { ?>
+												<?php
+													foreach ($this->getPivotFooterIcons($poweredbyType) as $blockName => $footerIcons) { ?>
 													<li class="<?php echo $blockName ?>"><?php foreach ($footerIcons as $icon) { ?>
 														<?php echo $this->getSkin()->makeFooterIcon($icon, $poweredbyMakeType); ?>
 														<?php } ?>
@@ -260,7 +261,23 @@ class PivotTemplate extends BaseTemplate {
 <?php
 		
 	}
-	
+
+	function getPivotFooterIcons( string $poweredbyType ) {
+		$footerIcons = $this->get( 'footericons' );
+		$poweredbyType = 'nocopyright';
+		if ( $poweredbyType == 'nocopyright' ) {
+			unset( $footerIcons['copyright'] );
+		} elseif ( $poweredbyType === 'icononly' ) {
+			foreach ( $footerIcons as $footerIconsKey => &$footerIconsBlock ) {
+				foreach ( $footerIconsBlock as $footerIconKey => $footerIcon ) {
+						if ( !isset( $footerIcon['src'] ) ) {
+								unset( $footerIconsBlock[$footerIconKey] );
+						}
+				}
+			}
+		}
+		return $footerIcons;
+	}
 	function renderSidebar() { 
 		$sidebar = $this->getSidebar();
 		foreach ($sidebar as $boxName => $box) { 
