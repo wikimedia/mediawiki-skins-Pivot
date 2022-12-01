@@ -40,7 +40,7 @@
 	},
 	"ResourceModules": {
 		"skins.pivot.styles": {
-			"position": "top",
+			"class": "ResourceLoaderSkinModule",
 			"features": {
 				"toc": true
 			},
