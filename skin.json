@@ -31,7 +31,7 @@
 		"MediaWiki": ">= 1.39.0"
 	},
 	"MessagesDirs": {
-		"Skinpivot": [
+		"Pivot": [
 			"i18n"
 		]
 	},
@@ -91,7 +91,7 @@
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
-		"remoteSkinPath": "pivot"
+		"remoteSkinPath": "Pivot"
 	},
 	"config": {},
 	"manifest_version": 1

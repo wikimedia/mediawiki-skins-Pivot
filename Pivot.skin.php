@@ -32,7 +32,7 @@ class PivotTemplate extends BaseTemplate {
 		}
 		
 		if ( $wgPivotFeatures['preloadFontAwesome'] ) {
-			$this->getOutput()->addHeadItem('font', '<link rel="preload" href="'.$wgLocalStylePath.'/pivot/assets/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin="anonymous" />');
+			$this->getOutput()->addHeadItem('font', '<link rel="preload" href="'.$wgLocalStylePath.'/Pivot/assets/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin="anonymous" />');
 		}
 
 		switch ($wgPivotFeatures['usePivotTabs']) {

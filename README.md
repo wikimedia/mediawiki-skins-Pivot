@@ -16,12 +16,12 @@ extract them from, e.g. for MediaWiki 1.38.x:
 
 Use "REL_39.zip" for MediaWiki 1.39.x, etc.
 
-You should extract that into a folder named `pivot` in your `skins` directory.
+You should extract that into a folder named `Pivot` in your `skins` directory.
 
 Alternatively, you can use Git to clone the repository, which makes it very easy to update the code, using e.g. for
 MediaWiki 1.38.x:
 
-    git clone https://github.com/wikimedia/mediawiki-skins-Pivot.git pivot
+    git clone https://github.com/wikimedia/mediawiki-skins-Pivot.git Pivot
 
 followed by
 
@@ -33,7 +33,7 @@ Use `REL_39` for MediaWiki 1.39.x, etc.
 
 Once the skin is in place add the following line to your "LocalSettings.php" file:
 
-    wfLoadSkin( 'pivot' );
+    wfLoadSkin( 'Pivot' );
 
 This will activate Pivot in your installation. At this point you can select it as a user skin in your user preferences.
 
