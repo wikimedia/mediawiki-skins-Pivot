@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"MATsxm"
+			"MATsxm",
+			"Verdy p"
 		]
 	},
 	"skinname-pivot": "Pivot",
-	"pivot-desc": "Un skin pour mobiles qui permet un affichage du contenu pour tous types d'affichages.",
-	"pivot-browsermsg": "l'affichage sur cette version d'Internet Explorer peut être altéré. Nous vous recommandons de la mettre à jour niveau vers une version plus récente d\\Internet Explorer ou de passer à un autre navigateur tel que Firefox ou Chrome.",
-	"pivot-menutitle": "Menu"
+	"pivot-desc": "Un habillage pour mobiles qui « pivote » de façon transparente sur toute taille d’écran.",
+	"pivot-browsermsg": "L’affichage avec cette version d’Internet Explorer ne pas être correct. Nous vous recommandons de vous mettre à niveau vers une version plus récente d’Internet Explorer ou de passer à un autre navigateur tel que Firefox ou Chrome.",
+	"pivot-menutitle": "Menu",
+	"pivot-personal-tools": "Outils personnels"
 }
