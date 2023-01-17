@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Marijke Stuivenberg"
+			"Marijke Stuivenberg",
+			"McDutchie"
 		]
 	},
 	"skinname-pivot": "Pivot",
-	"pivot-desc": "Biedt een uiterlijk dat er voor zorgt dat de inhoud op de voorgrond wordt weergegeven",
+	"pivot-desc": "Een uiterlijk voor mobiele apparaten dat zich naadloos \"wentelt\" naar elk schermformaat.",
 	"pivot-browsermsg": "wordt mogelijk niet goed weergegeven in deze versie van Internet Explorer. Aanbevolen wordt te upgraden naar een nieuwere versie van Internet Explorer of om te schakelen naar een browser zoals Firefox of Chrome.",
-	"pivot-menutitle": "Menu"
+	"pivot-menutitle": "Menu",
+	"pivot-personal-tools": "Persoonlijke hulpmiddelen"
 }
