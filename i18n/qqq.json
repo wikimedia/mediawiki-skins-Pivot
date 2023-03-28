@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Tom Hutchison",
-			"Nike"
+			"Nike",
+			"Umherirrender"
 		]
 	},
 	"skinname-pivot": "name of skin",
-	"pivot-desc": "description of skin",
+	"pivot-desc": "{{desc|what=skin|name=Pivot|url=https://www.mediawiki.org/wiki/Skin:Pivot}}",
 	"pivot-browsermsg": "old versions of IE not supported message.\n\nCurrently this message is unconditionally prefixed by the sitename and a space in the code.",
 	"pivot-menutitle": "menu title",
 	"pivot-personal-tools": "logged in title for personal tools"
