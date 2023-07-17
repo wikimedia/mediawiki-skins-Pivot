@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"BerryAVGN",
 			"Kareyac"
 		]
 	},
-	"pivot-menutitle": "Меню"
+	"pivot-desc": "Тема оформления для мобильных устройств, которая плавно «поворачивается» под дисплей любого размера.",
+	"pivot-browsermsg": "может выглядеть не так, как ожидалось в этой версии Internet Explorer. Мы рекомендуем обновить Internet Explorer до более новой версии или перейти на другой браузер, например Firefox или Chrome.",
+	"pivot-menutitle": "Меню",
+	"pivot-personal-tools": "Личные инструменты"
 }
