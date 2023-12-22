@@ -3,16 +3,16 @@
 use MediaWiki\MediaWikiServices;
 
 /**
- * Skin file for Pivot 
+ * Skin file for Pivot
  *
  * @file
  * @ingroup Skins
  */
 class PivotTemplate extends BaseTemplate {
 	public function execute() {
-		global $wgPivotFeatures;
+		global $wgPivotFeatures, $wgLocalStylePath;
 		$user = $this->getSkin()->getUser();
-		$wgPivotFeaturesDefaults = array(
+		$defaultSettings = array(
 			'showActionsForAnon' => true,
 			'fixedNavBar' => false,
 			'usePivotTabs' => false,
@@ -27,14 +27,14 @@ class PivotTemplate extends BaseTemplate {
 			'useAddThisShare' => '',
 			'useAddThisFollow' => ''
 		);
-		foreach ($wgPivotFeaturesDefaults as $fgOption => $fgOptionValue) {
+		foreach ($defaultSettings as $fgOption => $fgOptionValue) {
 			if ( !isset($wgPivotFeatures[$fgOption]) ) {
 				$wgPivotFeatures[$fgOption] = $fgOptionValue;
 			}
 		}
-		
+
 		if ( $wgPivotFeatures['preloadFontAwesome'] ) {
-			$this->getOutput()->addHeadItem('font', '<link rel="preload" href="'.$wgLocalStylePath.'/Pivot/assets/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin="anonymous" />');
+			$this->getSkin()->getOutput()->addHeadItem('font', '<link rel="preload" href="'.$wgLocalStylePath.'/Pivot/assets/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin="anonymous" />');
 		}
 
 		switch ($wgPivotFeatures['usePivotTabs']) {
@@ -46,7 +46,7 @@ class PivotTemplate extends BaseTemplate {
 				$markers = array("&lt;a", "&lt;/a", "&gt;");
 				$tags = array("<a", "</a", ">");
 				$body = str_replace($markers, $tags, $out);
-				break;	
+				break;
 			default:
 				$body = '';
 				break;
@@ -59,7 +59,7 @@ class PivotTemplate extends BaseTemplate {
 			default:
 				$poweredbyType = "nocopyright";
 				$poweredbyMakeType = 'withoutImage';
-				break;	
+				break;
 		}
 
 ?>
@@ -71,7 +71,7 @@ class PivotTemplate extends BaseTemplate {
 					<section id="left-nav-aside" class="left-small show-for-small">
 						<a href="#" class="left-off-canvas-toggle"><span id="menu-user"><i class="fa fa-navicon fa-lg"></i></span></a>
 					</section>
-					
+
 					<section id="middle-nav" class="middle tab-bar-section">
 						<div class="title"><a href="<?php echo $this->data['nav_urls']['mainpage']['href']; ?>">
 					<span class="show-for-medium-up"><?php echo $wgPivotFeatures['wikiNameDesktop']; ?></span>
@@ -81,7 +81,7 @@ class PivotTemplate extends BaseTemplate {
 								<?php } ?>
 						<?php echo $wgPivotFeatures['wikiName']; ?></span></a></div>
 					</section>
-					
+
 					<section id="right-nav-aside" class="right-small">
 					<a href="#" class="right-off-canvas-toggle"><span id="menu-user"><i class="fa <?php if ($user->isRegistered()): ?>fa-user<?php else: ?>fa-navicon<?php endif; ?> fa-lg"></i></span></a>
 					</section>
@@ -89,7 +89,7 @@ class PivotTemplate extends BaseTemplate {
 				<?php if ($wgPivotFeatures['fixedNavBar'] != false) echo "</div>"; ?>
 				    <aside class="left-off-canvas-menu">
       					<ul class="off-canvas-list">
-						
+
 								<li class="has-form">
 									<form action="<?php $this->text( 'wgScript' ); ?>" id="searchform-sidebar" class="mw-search">
 										<div class="row collapse">
@@ -99,11 +99,11 @@ class PivotTemplate extends BaseTemplate {
 										</div>
 									</form>
 								</li>
-								
+
 							<?php $this->renderSidebar() ?>
 						</ul>
 					</aside>
-					
+
 					<aside class="right-off-canvas-menu">
 					  <ul class="off-canvas-list">
 					<?php if ($user->isRegistered()): ?>
@@ -116,18 +116,18 @@ class PivotTemplate extends BaseTemplate {
 					</aside>
 
 					<section id="main-section" class="main-section" <?php if ($wgPivotFeatures['fixedNavBar'] != false) echo "style='margin-top:2.8125em'"; ?>>
-					
+
 						<div id="page-content">
-							
+
 							<div id="mw-js-message" style="display:none;"></div>
 
 							<div class="row">
-								
+
 								<div id="sidebar" class="large-2 medium-3 columns hide-for-small hide-for-print">
 										<ul class="side-nav">
 											<li class="name logo">
 											<a href="<?php echo $this->data['nav_urls']['mainpage']['href']; ?>">
-												<img alt="<?php echo $this->text('sitename'); ?>" src="<?php echo $this->text('logopath') ?>" style="max-width: 100%;height: auto;display: inline-block; vertical-align: middle;"></a>		
+												<img alt="<?php echo $this->text('sitename'); ?>" src="<?php echo $this->text('logopath') ?>" style="max-width: 100%;height: auto;display: inline-block; vertical-align: middle;"></a>
 											</li>
 											<li class="has-form">
 												<form action="<?php $this->text( 'wgScript' ); ?>" id="searchform-offCanvas" class="mw-search">
@@ -138,13 +138,13 @@ class PivotTemplate extends BaseTemplate {
 													</div>
 												</form>
 											</li>
-								
+
 											<?php $this->renderSidebar() ?>
 										</ul>
 								</div>
-								
+
 								<div id="p-cactions" class="large-10 medium-9 columns">
-								
+
 									<div class="row">
 										<div class="large-12 columns">
 												<!-- Output page indicators -->
@@ -165,7 +165,7 @@ class PivotTemplate extends BaseTemplate {
 												<?php if ( $this->data['newtalk'] ) { ?><div id="usermessage" class="newtalk"><?php $this->html( 'newtalk' ); ?></div><?php } ?>
 										</div>
 									</div>
-								
+
 									<?php if ($user->isRegistered() || $wgPivotFeatures['showActionsForAnon']): ?>
 										<a href="#" data-options="align:left" data-dropdown="drop1" class="button secondary small radius pull-right hide-for-print" id="drop"><i class="fa fa-navicon fa-lg"><span id="page-actions" class="show-for-medium-up">&nbsp;<?php echo wfMessage( 'actions' )->text() ?></span></i></a>
 										<ul id="drop1" class="tiny content f-dropdown" data-dropdown-content>
@@ -192,7 +192,7 @@ class PivotTemplate extends BaseTemplate {
 									<?php if ( $this->html('subtitle') ) { ?><h5 id="sitesub" class="subtitle"><?php $this->html('subtitle') ?></h5><?php } ?>
 									<div id="contentSub" class="clear_both"></div>
 									<div id="bodyContent" class="mw-bodytext">
-									<?php 
+									<?php
 									switch ($wgPivotFeatures['usePivotTabs']) {
 										case true:
 											echo $body;
@@ -210,8 +210,8 @@ class PivotTemplate extends BaseTemplate {
 											<div class="group"><?php $this->html('catlinks'); ?></div>
 											<?php $this->html('dataAfterContent'); ?>
 										</div>
-									</div>	
-													
+									</div>
+
 									<footer class="row">
 
 										<div id="footer">
@@ -219,9 +219,9 @@ class PivotTemplate extends BaseTemplate {
 											<ul id="footer-left">
 												<?php foreach ($this->getFooterLinks("flat") as $key) { ?>
 													<li id="footer-<?php echo $key ?>"><?php $this->html($key) ?></li>
-												<?php } ?>									
+												<?php } ?>
 											</ul>
-											</div>	
+											</div>
 											<div id="footer-right-icons" class="small-12 medium-4 large-3 columns hide-for-print">
 											<ul id="footer-right">
 												<li class="social-follow hide-for-print">
@@ -240,28 +240,28 @@ class PivotTemplate extends BaseTemplate {
 													</li>
 												<?php } ?>
 											</ul>
-											</div>		
-										</div>			
+											</div>
+										</div>
 									</footer>
-								
+
 								</div>
 						</div>
 					</div>
-						
+
 				</section>
-				
+
 			</div>
 		</div>
 		<div>
-			<a class="exit-off-canvas"></a>	
+			<a class="exit-off-canvas"></a>
 		</div>
 
 			<?php if ($this->data['isarticle'] && $wgPivotFeatures['addThisPUBID'] !== '') { ?>
 				<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<?php echo $wgPivotFeatures['addThisPUBID']; ?>" async="async"></script>
-			<?php } ?>	
+			<?php } ?>
 
 <?php
-		
+
 	}
 
 	function getPivotFooterIcons( string $poweredbyType ) {
@@ -280,14 +280,14 @@ class PivotTemplate extends BaseTemplate {
 		}
 		return $footerIcons;
 	}
-	function renderSidebar() { 
+	function renderSidebar() {
 		$sidebar = $this->getSidebar();
-		foreach ($sidebar as $boxName => $box) { 
+		foreach ($sidebar as $boxName => $box) {
 			echo '<li><label class="sidebar" id="'.Sanitizer::escapeIdForAttribute( $box['id'] ).'"';echo Linker::tooltip( $box['id'] ).'>'.htmlspecialchars( $box['header'] ).'</label></li>';
 					if ( is_array( $box['content'] ) ) {
 							foreach ($box['content'] as $key => $item) { echo $this->makeListItem($key, $item); }
-								} 
+								}
 							}
-		return;	}	
+		return;	}
 }
 ?>
