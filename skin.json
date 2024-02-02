@@ -28,7 +28,7 @@
 		}
 	},
 	"requires": {
-		"MediaWiki": ">= 1.39.0"
+		"MediaWiki": ">= 1.41.0"
 	},
 	"MessagesDirs": {
 		"Pivot": [
@@ -40,7 +40,7 @@
 	},
 	"ResourceModules": {
 		"skins.pivot.styles": {
-			"class": "ResourceLoaderSkinModule",
+			"class": "MediaWiki\\ResourceLoader\\SkinModule",
 			"features": {
 				"toc": true
 			},
@@ -84,7 +84,7 @@
 				"assets/scripts/pivot.js"
 			],
 			"dependencies": [
-				"jquery.cookie",
+				"mediawiki.cookie",
 				"skins.pivot.modernizr"
 			]
 		}
