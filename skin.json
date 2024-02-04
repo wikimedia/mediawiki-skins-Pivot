@@ -42,6 +42,7 @@
 		"skins.pivot.styles": {
 			"class": "MediaWiki\\ResourceLoader\\SkinModule",
 			"features": {
+				"content-media": true,
 				"toc": true
 			},
 			"styles": [
