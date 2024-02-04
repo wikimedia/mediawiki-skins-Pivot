@@ -42,6 +42,7 @@
 		"skins.pivot.styles": {
 			"class": "ResourceLoaderSkinModule",
 			"features": {
+				"content-media": true,
 				"toc": true
 			},
 			"styles": [
