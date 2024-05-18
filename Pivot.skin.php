@@ -283,7 +283,7 @@ class PivotTemplate extends BaseTemplate {
 	function renderSidebar() {
 		$sidebar = $this->getSidebar();
 		foreach ($sidebar as $boxName => $box) {
-			echo '<li><label class="sidebar" id="'.Sanitizer::escapeIdForAttribute( $box['id'] ).'"';echo Linker::tooltip( $box['id'] ).'>'.htmlspecialchars( $box['header'] ).'</label></li>';
+			echo '<li><label class="sidebar" id="'.htmlspecialchars( Sanitizer::escapeIdForAttribute( $box['id'] ), ENT_QUOTES ).'"';echo Linker::tooltip( $box['id'] ).'>'.htmlspecialchars( $box['header'] ).'</label></li>';
 					if ( is_array( $box['content'] ) ) {
 							foreach ($box['content'] as $key => $item) { echo $this->makeListItem($key, $item); }
 								}
