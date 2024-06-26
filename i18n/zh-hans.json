@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"铁桶"
+			"铁桶",
+			"Lakejason0"
 		]
 	},
+	"pivot-desc": "可以无缝“转移”（Pivot）至任意尺寸显示屏的移动皮肤。",
+	"pivot-browsermsg": "在此版本Internet Explorer中可能无法按预期工作。我们建议您升级至新版本Internet Explorer，或切换为其他浏览器，例如Firefox或Chrome。",
 	"pivot-menutitle": "菜单",
 	"pivot-personal-tools": "个人工具"
 }
