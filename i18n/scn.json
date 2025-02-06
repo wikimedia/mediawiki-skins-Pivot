@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ajeje Brazorf"
+			"Ajeje Brazorf",
+			"GianAntonucci"
 		]
 	},
-	"pivot-menutitle": "Menu",
-	"pivot-personal-tools": "Strumenta pirsunali"
+	"pivot-menutitle": "Menù",
+	"pivot-personal-tools": "Stigghi pirsunali"
 }
