@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"skinname-pivot": "Pivot",
+	"pivot-desc": "Mobilná téma vzhľadu, ktorá sa plynulo „otáča“ (Pivot) na displej ľubovoľnej veľkosti.",
+	"pivot-browsermsg": "nemusí v tejto verzii Internet Explorera vyzerať podľa očakávania. Odporúčame aktualizovať na novšiu verziu Internet Explorera alebo prejsť na prehliadač ako Firefox alebo Chrome.",
+	"pivot-menutitle": "Menu",
+	"pivot-personal-tools": "Osobné nástroje"
+}
