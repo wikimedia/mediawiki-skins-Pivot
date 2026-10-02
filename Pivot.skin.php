@@ -2,6 +2,7 @@
 
 use MediaWiki\Linker\Linker;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Skin\BaseTemplate;
 
 /**
  * Skin file for Pivot
@@ -109,10 +110,10 @@ class PivotTemplate extends BaseTemplate {
 					  <ul class="off-canvas-list">
 					<?php if ($user->isRegistered()): ?>
 						<li id="personal-tools"><label><?php echo wfMessage( 'pivot-personal-tools' )->text() ?></label></li>
-						<?php foreach ($this->getPersonalTools() as $key => $item) { echo $this->makeListItem($key, $item); } ?>
-							<?php else: ?>
-								<?php foreach ($this->getPersonalTools() as $key => $item) { echo $this->makeListItem($key, $item); } ?>
-							<?php endif; ?>
+					<?php endif; ?>
+					<?php foreach ( $this->getPivotPersonalTools() as $key => $item ) {
+						echo $this->makeListItem( $key, $item );
+					} ?>
 					  </ul>
 					</aside>
 
@@ -170,7 +171,13 @@ class PivotTemplate extends BaseTemplate {
 									<?php if ($user->isRegistered() || $wgPivotFeatures['showActionsForAnon']): ?>
 										<a href="#" data-options="align:left" data-dropdown="drop1" class="button secondary small radius pull-right hide-for-print" id="drop"><i class="fa fa-navicon fa-lg"><span id="page-actions" class="show-for-medium-up">&nbsp;<?php echo wfMessage( 'actions' )->text() ?></span></i></a>
 										<ul id="drop1" class="tiny content f-dropdown" data-dropdown-content>
-											<?php foreach($this->data['content_actions'] as $key => $tab) { echo preg_replace(array('/\sprimary="1"/', '/\scontext="[a-z]+"/', '/\srel="archives"/'),'',$this->makeListItem($key, $tab)); } ?>
+											<?php foreach ( $this->getPivotContentActions() as $key => $tab ) {
+												echo preg_replace(
+													[ '/\sprimary="1"/', '/\scontext="[a-z]+"/', '/\srel="archives"/' ],
+													'',
+													$this->makeListItem( $key, $tab )
+												);
+											} ?>
 											<?php MediaWikiServices::getInstance()->getHookContainer()->run( 'SkinTemplateToolboxEnd', array( &$this, true ) );  ?>
 										</ul>
 
@@ -263,6 +270,46 @@ class PivotTemplate extends BaseTemplate {
 
 <?php
 
+	}
+
+	/**
+	 * Combine the modern personal menus in their legacy display order.
+	 *
+	 * @return array[] Items suitable for makeListItem()
+	 */
+	protected function getPivotPersonalTools(): array {
+		$contentNavigation = $this->get( 'content_navigation' );
+		return $this->getSkin()->getPersonalToolsForMakeListItem( array_merge(
+			$contentNavigation['user-interface-preferences'],
+			$contentNavigation['user-page'],
+			$contentNavigation['notifications'],
+			$contentNavigation['user-menu']
+		) );
+	}
+
+	/**
+	 * Flatten only page menus, preserving the legacy content_actions behavior.
+	 *
+	 * @return array[]
+	 */
+	protected function getPivotContentActions(): array {
+		$contentNavigation = $this->get( 'content_navigation' );
+		$actions = [];
+		foreach ( [ 'associated-pages', 'views', 'actions', 'variants' ] as $menu ) {
+			foreach ( $contentNavigation[$menu] as $key => $item ) {
+				if ( !empty( $item['redundant'] ) ) {
+					continue;
+				}
+				// Keep the keys used for tooltips and access keys by makeListItem().
+				if ( isset( $item['id'] ) && str_starts_with( $item['id'], 'ca-' ) ) {
+					$key = substr( $item['id'], 3 );
+				}
+				if ( !isset( $actions[$key] ) ) {
+					$actions[$key] = $item;
+				}
+			}
+		}
+		return $actions;
 	}
 
 	function getPivotFooterIcons( string $poweredbyType ) {
