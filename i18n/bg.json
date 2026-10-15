@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"StanProg"
+		]
+	},
+	"pivot-desc": "Мобилен облик, който се нагажда плавно към всеки размер на екрана.",
+	"pivot-browsermsg": "може да изглежда различно от очакваното в тази версия на Internet Explorer. Препоръчваме ви да надстроите до по-нова версия на Internet Explorer или да преминете към браузър като Firefox или Chrome.",
+	"pivot-menutitle": "Меню",
+	"pivot-personal-tools": "Лични инструменти"
+}
